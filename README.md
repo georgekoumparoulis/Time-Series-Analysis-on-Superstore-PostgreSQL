@@ -1,4 +1,4 @@
-# Time-Series-Analysis-on-Superstore-PostgreSQL
+# Time Series Analysis on Superstore
 
 SQL Project Idea: 
 
