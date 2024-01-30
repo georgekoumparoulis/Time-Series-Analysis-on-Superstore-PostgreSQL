@@ -103,22 +103,23 @@ with cte as
 select 
 	product_id, 
 	sales, 
-    initial_price, 
-    cost, 
-    initial_profit, 
-    initial_price_per_item, 
-    initial_profit_percentage, 
-    quantity, 
-    discount, 
-    profit, 
-    profit_per_item, 
-    price, 
-    profit_percentage
+    	initial_price, 
+    	cost, 
+    	initial_profit, 
+    	initial_price_per_item, 
+    	initial_profit_percentage, 
+    	quantity, 
+    	discount, 
+    	profit, 
+    	profit_per_item, 
+    	price, 
+    	profit_percentage
 from 
 	cte
 where 
 	ind = 1
-order by product_id
+order by 
+	product_id
 ;
 
 /*
@@ -127,9 +128,9 @@ about discounts and profit
 */
 
 create table profit_product_id(
-								product_id2 varchar(50),
-								profitpercentage real
-							  )
+				product_id2 varchar(50),
+				profitpercentage real
+   			       )
 ;
 
 /*
@@ -193,28 +194,28 @@ with cte_b as
 select 
 	row_id, 
 	order_id, 
-    order_date, 
-    ship_date, 
-    ship_mode, 
+    	order_date, 
+   	ship_date, 
+    	ship_mode, 
 	customer_id, 
-    customer_name,
-    segment, 
-    country, 
-    city, 
-    state, 
-    postal_code, 
-    region, 
-    product_id, 
-    category, 
-    sub_category, 
-    product_name, 
-    sales, 
-    quantity, 
-    discount, 
-    profit, 
-    round(cast(profitpercentage as numeric), 2) as profit_percentage, 
-    discount_check, 
-    num_check
+    	customer_name,
+    	segment, 
+    	country, 
+    	city, 
+    	state, 
+    	postal_code, 
+    	region, 
+    	product_id, 
+    	category, 
+    	sub_category, 
+	product_name, 
+	sales, 
+	quantity, 
+	discount, 
+    	profit, 
+    	round(cast(profitpercentage as numeric), 2) as profit_percentage, 
+    	discount_check, 
+    	num_check
 from 
 	cte_b
 where 
@@ -312,7 +313,8 @@ Dataset rankng based on sales in descending order with the use of rank function
 select
 	rank() over(order by sales) as ranking,
 	*
-from superstore
+from 
+	superstore
 ;
 
 /*
@@ -394,18 +396,18 @@ limit 1
 select 
 	category,
 	sub_category,
-    order_date,
-    round((avg(cast(discount as numeric))),2),
-    lag(round((avg(cast(discount as numeric))),2)) over (partition by category, sub_category order by order_date ) AS previous_day_discount,
-    (round((avg(cast(discount as numeric))),2)) - lag(round((avg(cast(discount as numeric))),2)) over (partition by category, sub_category order by order_date) AS discount_change
+    	order_date,
+    	round((avg(cast(discount as numeric))),2),
+    	lag(round((avg(cast(discount as numeric))),2)) over (partition by category, sub_category order by order_date ) AS previous_day_discount,
+    	(round((avg(cast(discount as numeric))),2)) - lag(round((avg(cast(discount as numeric))),2)) over (partition by category, sub_category order by order_date) AS discount_change
 from 
-    superstore
+    	superstore
 where
 	order_date between '2016-09-04' and '2016-09-05' 
 group by
 	category, order_date, sub_category
 order by
-    category, sub_category, order_date
+    	category, sub_category, order_date
 ;
 
 			/*
@@ -492,23 +494,23 @@ create table
 
 insert into 
 		pd_discount(
-					pmkey,
-					discpercentage, 
-					furniture, 
-					office_supplies, 
-					technology)
+				pmkey,
+				discpercentage, 
+				furniture, 
+				office_supplies, 
+				technology)
 values(1,0,0,0,0),
-	  (2,0,0,0,0),
-	  (3,0,0,0,0),
-	  (4,0,0,0,0),
-	  (5,0,0,0,0),
-	  (6,0,0,0,0),
-	  (7,0,0,0,0),
-	  (8,0,0,0,0),
-	  (9,0,0,0,0),
-	  (10,0,0,0,0),
-	  (11,0,0,0,0),
-	  (12,0,0,0,0)
+      (2,0,0,0,0),
+      (3,0,0,0,0),
+      (4,0,0,0,0),
+      (5,0,0,0,0),
+      (6,0,0,0,0),
+      (7,0,0,0,0),
+      (8,0,0,0,0),
+      (9,0,0,0,0),
+      (10,0,0,0,0),
+      (11,0,0,0,0),
+      (12,0,0,0,0)
 ;
 		/*table update with discount values and infos*/
 do $$
@@ -537,8 +539,10 @@ begin
 end $$
 ;
 
-select *
-from pd_discount
+select 
+	*
+from 
+	pd_discount
 ;
 
 		/*Total count orders and ammount spent with avg discount per customer_id*/
